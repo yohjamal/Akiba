@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Master - Family Budget & Savings App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Akiba</h1>
+            <p>Learn to Save, Budget, and Grow Your Money!</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('budget')">📊 My Budget</button>
+            <button class="tab-button" onclick="openTab('expenses')">💸 Track Spending</button>
+            <button class="tab-button" onclick="openTab('goals')">🎯 Savings Goals</button>
+            <button class="tab-button" onclick="openTab('learn')">📚 Money Lessons</button>
+            <button class="tab-button" onclick="openTab('quiz')">🎮 Money Quiz</button>
+        </div>
+
+        <!-- Budget Tab -->
+        <div id="budget" class="tab-content active">
+            <h2 class="section-title">My Monthly Budget</h2>
+            
+            <div class="tip-box">
+                <h4>💡 What is a Budget?</h4>
+                <p>A budget is a plan for your money. It helps you know how much money you have, how much you spend, and how much you can save. Think of it like planning your allowance!</p>
+            </div>
+
+            <div class="form-group">
+                <label>How much money do you get each month? (Income)</label>
+                <input type="number" id="income" placeholder="Enter your monthly income" oninput="calculateBudget()">
+            </div>
+
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h3>Money Coming In</h3>
+                    <div class="amount" id="totalIncome">$0</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Money Going Out</h3>
+                    <div class="amount" id="totalExpenses">$0</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Money Left Over</h3>
+                    <div class="amount" id="remaining">$0</div>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <h3>Your Budget Health</h3>
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="budgetProgress" style="width: 0%">0%</div>
+                </div>
+                <p id="budgetStatus"></p>
+            </div>
+
+            <div class="chart-container" id="expenseChart"></div>
+        </div>
+
+        <!-- Expenses Tab -->
+        <div id="expenses" class="tab-content">
+            <h2 class="section-title">Track Your Spending</h2>
+
+            <div class="tip-box">
+                <h4>💡 Why Track Spending?</h4>
+                <p>When you write down what you spend, you can see where your money goes. This helps you make smart choices and save more!</p>
+            </div>
+
+            <div class="form-group">
+                <label>What did you buy?</label>
+                <input type="text" id="expenseName" placeholder="Example: Lunch, Toys, Snacks">
+            </div>
+
+            <div class="form-group">
+                <label>How much did it cost?</label>
+                <input type="number" id="expenseAmount" placeholder="Enter amount">
+            </div>
+
+            <div class="form-group">
+                <label>What type of expense?</label>
+                <select id="expenseCategory">
+                    <option value="food">🍔 Food & Snacks</option>
+                    <option value="fun">🎮 Fun & Entertainment</option>
+                    <option value="clothes">👕 Clothes & Shoes</option>
+                    <option value="school">📚 School Supplies</option>
+                    <option value="transport">🚌 Transportation</option>
+                    <option value="bills">🏠 Bills (Rent, Utilities)</option>
+                    <option value="other">📦 Other</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="addExpense()">Add Expense</button>
+
+            <div class="expense-list" id="expenseList"></div>
+        </div>
+
+        <!-- Goals Tab -->
+        <div id="goals" class="tab-content">
+            <h2 class="section-title">My Savings Goals</h2>
+
+            <div class="tip-box">
+                <h4>💡 What is a Savings Goal?</h4>
+                <p>A savings goal is something you want to buy or do in the future. When you save a little bit each time, you can reach your goal! It's like filling up a piggy bank.</p>
+            </div>
+
+            <div class="form-group">
+                <label>What do you want to save for?</label>
+                <input type="text" id="goalName" placeholder="Example: New bike, Vacation, Emergency fund">
+            </div>
+
+            <div class="form-group">
+                <label>How much does it cost?</label>
+                <input type="number" id="goalAmount" placeholder="Enter target amount">
+            </div>
+
+            <div class="form-group">
+                <label>How much have you saved so far?</label>
+                <input type="number" id="goalSaved" placeholder="Enter current savings">
+            </div>
+
+            <button class="btn btn-primary" onclick="addGoal()">Create Goal</button>
+
+            <div class="goal-list" id="goalList"></div>
+        </div>
+
+        <!-- Learn Tab -->
+        <div id="learn" class="tab-content">
+            <h2 class="section-title">Money Lessons</h2>
+
+            <div class="lesson-card">
+                <h3>📖 Lesson 1: Understanding Money</h3>
+                <p><strong>What is Money?</strong> Money is what we use to buy things we need and want. We earn money by working, and we can use it to buy food, clothes, toys, or save it for later.</p>
+                <p><strong>Key Idea:</strong> Money is limited, so we must choose how to use it wisely!</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>💰 Lesson 2: Needs vs. Wants</h3>
+                <p><strong>Needs</strong> are things you must have to live: food, water, shelter, clothes.</p>
+                <p><strong>Wants</strong> are things that are nice to have but not necessary: toys, candy, new games.</p>
+                <p><strong>Smart Tip:</strong> Always pay for needs first, then wants if you have money left!</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>🏦 Lesson 3: The Power of Saving</h3>
+                <p><strong>Why Save?</strong> Saving means keeping some money for later instead of spending it all now. This helps you:</p>
+                <p>✅ Buy bigger things you really want<br>
+                ✅ Be prepared for emergencies<br>
+                ✅ Feel secure and less worried about money</p>
+                <p><strong>The 50/30/20 Rule:</strong> Try to spend 50% on needs, 30% on wants, and save 20%!</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>📊 Lesson 4: How Budgets Work</h3>
+                <p><strong>A Budget is Your Money Plan:</strong></p>
+                <p>1. <strong>Write down</strong> how much money you have<br>
+                2. <strong>List</strong> what you need to spend on<br>
+                3. <strong>Decide</strong> how much to save<br>
+                4. <strong>Track</strong> your spending to stay on plan</p>
+                <p><strong>Remember:</strong> A budget gives YOU control over your money!</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>🌱 Lesson 5: Making Money Grow</h3>
+                <p><strong>Interest:</strong> When you save money in a bank, the bank pays you extra money called interest. It's like getting paid for saving!</p>
+                <p><strong>Example:</strong> If you save $100 and the bank gives 5% interest per year, after one year you'll have $105. That's $5 free money just for saving!</p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>⚠️ Lesson 6: Avoiding Money Traps</h3>
+                <p><strong>Be Careful Of:</strong></p>
+                <p>🚫 <strong>Impulse Buying:</strong> Buying things right away without thinking<br>
+                🚫 <strong>Peer Pressure:</strong> Buying things just because friends have them<br>
+                🚫 <strong>Sales Tricks:</strong> "Buy now or miss out!" - Take time to think!<br>
+                🚫 <strong>Credit Cards:</strong> They're borrowed money you must pay back with extra fees</p>
+            </div>
+        </div>
+
+        <!-- Quiz Tab -->
+        <div id="quiz" class="tab-content">
+            <h2 class="section-title">Test Your Money Skills!</h2>
+
+            <div class="tip-box">
+                <h4>🎯 How it Works</h4>
+                <p>Answer the questions below to test what you've learned. Click on your answer to see if you got it right!</p>
+            </div>
+
+            <div class="quiz-container" id="quizContainer"></div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-primary" onclick="resetQuiz()">Try Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
