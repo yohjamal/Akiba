@@ -62,20 +62,21 @@ const quizQuestions = [
         explanation: "A budget is your money plan - it helps you decide how to spend and save wisely!"
     },
     {
-        question: "If you have $10 and want to follow the 50/30/20 rule, how much should you save?",
+        question: "If you have 10 KShs and want to follow the 50/30/20 rule, how much should you save?",
         options: [
-            "$1",
-            "$2",
-            "$5",
-            "$10"
+            "1 KShs",
+            "2 KShs",
+            "5 KShs",
+            "10 KShs"
         ],
         correct: 1,
-        explanation: "20% of $10 is $2. The 50/30/20 rule means: 50% needs, 30% wants, 20% savings!"
+        explanation: "20% of 10 KShs is 2 KShs. The 50/30/20 rule means: 50% needs, 30% wants, 20% savings!"
     }
 ];
 
 // Initialize app when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    initializeDarkMode();
     loadData();
     setupBudgetGuide();
 });
@@ -143,9 +144,9 @@ function calculateBudget() {
     const remaining = income - totalExpenses;
     const percentUsed = income > 0 ? (totalExpenses / income) * 100 : 0;
 
-    document.getElementById('totalIncome').textContent = '$' + income.toFixed(2);
-    document.getElementById('totalExpenses').textContent = '$' + totalExpenses.toFixed(2);
-    document.getElementById('remaining').textContent = '$' + remaining.toFixed(2);
+    document.getElementById('totalIncome').textContent = 'KShs ' + income.toFixed(2);
+    document.getElementById('totalExpenses').textContent = 'KShs ' + totalExpenses.toFixed(2);
+    document.getElementById('remaining').textContent = 'KShs ' + remaining.toFixed(2);
 
     const progressBar = document.getElementById('budgetProgress');
     progressBar.style.width = Math.min(percentUsed, 100) + '%';
@@ -196,7 +197,7 @@ function showExpenseChart() {
                 <div class="category-item">
                     <div style="display: flex; justify-content: between; align-items: center;">
                         <span style="flex: 1;">${cat.icon} ${cat.name}</span>
-                        <span style="font-weight: bold;">$${total.toFixed(2)}</span>
+                        <span style="font-weight: bold;">KShs ${total.toFixed(2)}</span>
                         <span style="color: #666; margin-left: 10px;">${percentage.toFixed(1)}%</span>
                     </div>
                     <div class="category-bar">
@@ -257,7 +258,7 @@ function displayExpenses() {
                         <div class="expense-name">${cat.icon} ${expense.name}</div>
                         <div class="expense-category">${expense.date} • ${cat.name}</div>
                     </div>
-                    <div class="expense-amount">$${expense.amount.toFixed(2)}</div>
+                    <div class="expense-amount">KShs ${expense.amount.toFixed(2)}</div>
                     <button class="delete-btn" onclick="deleteExpense(${expense.id})">Delete</button>
                 </div>
             `;
@@ -319,9 +320,9 @@ function displayGoals() {
                     <div class="goal-info">
                         <div class="goal-name">🎯 ${goal.name}</div>
                         <div class="goal-description">
-                            Target: $${goal.target.toFixed(2)} | 
-                            Saved: $${goal.saved.toFixed(2)} | 
-                            Remaining: $${remaining.toFixed(2)}
+                            Target: KShs ${goal.target.toFixed(2)} | 
+                            Saved: KShs ${goal.saved.toFixed(2)} | 
+                            Remaining: KShs ${remaining.toFixed(2)}
                         </div>
                         <div class="progress-bar-wrapper" style="margin-top: 10px;">
                             <div class="progress-bar" style="width: ${Math.min(percentage, 100)}%">
@@ -433,4 +434,30 @@ function getSpendingInsights() {
         largestExpense,
         expenseCount: expenses.length
     };
+}
+
+// Dark Mode Toggle
+function toggleDarkMode() {
+    const body = document.body;
+    const isDarkMode = body.classList.toggle('dark-mode');
+    
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', isDarkMode);
+    
+    // Update icon
+    const icon = document.getElementById('darkModeIcon');
+    icon.textContent = isDarkMode ? '☀️' : '🌙';
+}
+
+// Initialize dark mode based on saved preference
+function initializeDarkMode() {
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+    const icon = document.getElementById('darkModeIcon');
+    
+    if (savedDarkMode) {
+        document.body.classList.add('dark-mode');
+        icon.textContent = '☀️';
+    } else {
+        icon.textContent = '🌙';
+    }
 }

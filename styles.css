@@ -410,3 +410,191 @@ input:focus, select:focus {
         align-self: flex-end;
     }
 }
+
+/* Dark Mode Styles */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+body.dark-mode .container {
+    background: transparent;
+}
+
+body.dark-mode .header {
+    background: #2d3561;
+    color: #e0e0e0;
+}
+
+body.dark-mode .header h1 {
+    color: #a8d8ff;
+}
+
+body.dark-mode .header p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .tab-button {
+    background: #2d3561;
+    color: #b0b0b0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .tab-button:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .tab-button.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+body.dark-mode .tab-content {
+    background: #2d3561;
+    color: #e0e0e0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .section-title {
+    color: #a8d8ff;
+    border-bottom-color: #667eea;
+}
+
+body.dark-mode label {
+    color: #e0e0e0;
+}
+
+body.dark-mode input, body.dark-mode select {
+    background: #1a1a2e;
+    color: #e0e0e0;
+    border-color: #444;
+}
+
+body.dark-mode input:focus, body.dark-mode select:focus {
+    border-color: #667eea;
+    background: #1a1a2e;
+}
+
+body.dark-mode .summary-card {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+body.dark-mode .expense-item, body.dark-mode .goal-item {
+    background: #1a1a2e;
+    border: 1px solid #444;
+}
+
+body.dark-mode .expense-item:hover, body.dark-mode .goal-item:hover {
+    background: #25274d;
+    border-color: #667eea;
+}
+
+body.dark-mode .expense-name, body.dark-mode .goal-name {
+    color: #e0e0e0;
+}
+
+body.dark-mode .expense-category, body.dark-mode .goal-description {
+    color: #b0b0b0;
+}
+
+body.dark-mode .expense-amount, body.dark-mode .goal-amount {
+    color: #a8d8ff;
+}
+
+body.dark-mode .progress-bar-wrapper {
+    background: #1a1a2e;
+    border: 1px solid #444;
+}
+
+body.dark-mode .tip-box {
+    background: #2d3561;
+    border-left-color: #667eea;
+}
+
+body.dark-mode .tip-box h4 {
+    color: #a8d8ff;
+}
+
+body.dark-mode .tip-box p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .lesson-card {
+    background: #1a1a2e;
+    border-left-color: #667eea;
+}
+
+body.dark-mode .lesson-card:hover {
+    background: #25274d;
+}
+
+body.dark-mode .lesson-card h3 {
+    color: #a8d8ff;
+}
+
+body.dark-mode .lesson-card p {
+    color: #b0b0b0;
+}
+
+body.dark-mode .quiz-question {
+    background: #1a1a2e;
+}
+
+body.dark-mode .quiz-option {
+    background: #2d3561;
+    border-color: #444;
+    color: #e0e0e0;
+}
+
+body.dark-mode .quiz-option:hover {
+    border-color: #667eea;
+    background: #25274d;
+}
+
+body.dark-mode .quiz-option.correct {
+    background: #1d4620;
+    border-color: #28a745;
+    color: #90ee90;
+}
+
+body.dark-mode .quiz-option.incorrect {
+    background: #4a1a1a;
+    border-color: #dc3545;
+    color: #ff6b6b;
+}
+
+body.dark-mode .chart-container {
+    background: #1a1a2e;
+    border: 1px solid #444;
+}
+
+body.dark-mode .category-item {
+    background: #2d3561;
+    border-left-color: #667eea;
+}
+
+body.dark-mode .category-progress {
+    background: #1a1a2e;
+}
+
+body.dark-mode .delete-btn {
+    background: #dc3545;
+}
+
+body.dark-mode .delete-btn:hover {
+    background: #ff6b6b;
+}
